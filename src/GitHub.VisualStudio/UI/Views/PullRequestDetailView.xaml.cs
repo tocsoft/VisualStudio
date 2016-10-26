@@ -176,5 +176,46 @@ namespace GitHub.VisualStudio.UI.Views
                 item.IsSelected = true;
             }
         }
+
+        void ListView_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            ApplyContextMenuBinding<ListViewItem>(sender, e);
+        }
+
+        void TreeView_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            ApplyContextMenuBinding<TreeViewItem>(sender, e);
+        }
+        
+        void ApplyContextMenuBinding<TItem>(object sender, ContextMenuEventArgs e) where TItem : Control
+        {
+            e.Handled = true;
+            var container = sender as Control;
+            var item = VisualUpwardSearch<TItem>((DependencyObject)e.OriginalSource);
+
+            if (item != null)
+            {
+                var fileNode = item.DataContext as IPullRequestFileNode;
+                if (fileNode != null)
+                {
+                    container.ContextMenu.DataContext = this.DataContext;
+                    foreach (MenuItem menuItem in container.ContextMenu.Items)
+                    {
+                        menuItem.CommandParameter = fileNode;
+                    }
+
+                    e.Handled = false;
+                }
+            }
+        }
+
+        public static T VisualUpwardSearch<T>(DependencyObject source)  where T : class
+        {
+            while (source != null && !(source is T))
+                source = VisualTreeHelper.GetParent(source);
+
+            return source as T;
+        }
+
     }
 }
