@@ -45,6 +45,14 @@
         <Parent guid="guidContextMenuSet" id="idGitHubContextMenu"/>
       </Group>
 
+      <Groups>
+        <Group guid="guidSolutionExplorerContextMenuSet" id="grpIdProjectContextAdd">
+          <Parent guid="guidSHLMainMenu" id="cmdidShellWindowNavigate7" />
+        </Group>
+        <Group guid="guidSolutionExplorerContextMenuSet" id="grpIdSolutionContextAdd">
+          <Parent guid="guidSHLMainMenu" id="cmdidShellWindowNavigate5" />
+        </Group>
+      </Groups>
     </Groups>
 
     <Menus>
@@ -150,6 +158,17 @@
           <ButtonText>Copy link to clipboard</ButtonText>
         </Strings>
       </Button>
+    
+       <Button guid="guidSolutionExplorerContextMenuSet" 
+              id="addFromGitHubCommand" priority="0x0000" type="Button">
+          <Parent guid="guidSolutionExplorerContextMenuSet" id="grpIdProjectContextAdd" />
+          <Icon guid="guidImages" id="logo" />
+          <CommandFlag>IconIsMoniker</CommandFlag>
+          <CommandFlag>DynamicVisibility</CommandFlag>
+          <Strings>
+              <ButtonText>Add from GitHub</ButtonText>
+          </Strings>
+      </Button>
     </Buttons>
 
   </Commands>
@@ -214,6 +233,12 @@
       <Parent guid="guidGitHubCmdSet" id="idGitHubMenuGroup"/>
     </CommandPlacement>
 
+    <CommandPlacements>
+      <CommandPlacement guid="guidSolutionExplorerContextMenuSet" 
+                        id="addFromGitHubCommand" priority="0x1100">
+          <Parent guid="guidSolutionExplorerContextMenuSet" id="grpIdSolutionContextAdd" />
+      </CommandPlacement>
+   </CommandPlacements>
   </CommandPlacements>
     
   <Symbols>
@@ -260,6 +285,13 @@
       <IDSymbol name="openLinkCommand" value="0x100" />
       <IDSymbol name="copyLinkCommand" value="0x101"/>
       <IDSymbol name="idCreateGistCommand" value="0x0400" />
+    </GuidSymbol>
+    
+    
+    <GuidSymbol name="guidSolutionExplorerContextMenuSet" value="{1189F877-1830-4236-9767-3C04EEECA6A5}">
+      <IDSymbol name="grpIdProjectContextAdd" value="0x1080" />
+      <IDSymbol name="grpIdSolutionContextAdd" value="0x1081" />
+      <IDSymbol name="addFromGitHubCommand" value="0x1082" />
     </GuidSymbol>
     
     <GuidSymbol name="GUID_XAML_EDITOR" value="{4C87B692-1202-46AA-B64C-EF01FAEC53DA}">

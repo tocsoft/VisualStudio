@@ -28,6 +28,7 @@ namespace GitHub.Exports
         LoggedOut,
         NotAGitRepository,
         NotAGitHubRepository,
+        AddFileToSolution,
     }
 
     public enum MenuType

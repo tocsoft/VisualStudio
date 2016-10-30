@@ -31,7 +31,8 @@ namespace GitHub.UI
         PullRequests,
         Gist,
         LogoutRequired,
-        Home
+        Home,
+        AddFileToSolution
     }
 
     public class ViewWithData

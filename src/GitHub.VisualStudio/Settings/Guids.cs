@@ -9,10 +9,12 @@ namespace GitHub.VisualStudio
         public const string guidGitHubToolbarCmdSetString = "C5F1193E-F300-41B3-B4C4-5A703DD3C1C6";
         public const string guidContextMenuSetString = "31057D08-8C3C-4C5B-9F91-8682EA08EC27";
         public const string guidImageMonikerString = "27841f47-070a-46d6-90be-a5cbbfc724ac";
+        public const string guidSolutionExplorerContextMenuSetString = "1189F877-1830-4236-9767-3C04EEECA6A5";
 
         public static readonly Guid guidGitHubCmdSet = new Guid(guidGitHubCmdSetString);
         public static readonly Guid guidGitHubToolbarCmdSet = new Guid(guidGitHubToolbarCmdSetString);
         public static readonly Guid guidContextMenuSet = new Guid(guidContextMenuSetString);
         public static readonly Guid guidImageMoniker = new Guid(guidImageMonikerString);
+        public static readonly Guid guidSolutionExplorerContextMenuSet = new Guid(guidSolutionExplorerContextMenuSetString);
     }
 }

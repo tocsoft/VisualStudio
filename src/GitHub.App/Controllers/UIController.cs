@@ -307,6 +307,12 @@ namespace GitHub.Controllers
                 .PermitDynamic(Trigger.Cancel, () => Go(Trigger.Cancel))
                 .PermitDynamic(Trigger.Finish, () => Go(Trigger.Finish));
 
+            uiStateMachine.Configure(UIViewType.AddFileToSolution)
+                .OnEntry(tr => RunView(UIViewType.AddFileToSolution, CalculateDirection(tr)))
+                .PermitDynamic(Trigger.Next, () => Go(Trigger.Next))
+                .PermitDynamic(Trigger.Cancel, () => Go(Trigger.Cancel))
+                .PermitDynamic(Trigger.Finish, () => Go(Trigger.Finish));
+
             uiStateMachine.Configure(UIViewType.Create)
                 .OnEntry(tr => RunView(UIViewType.Create, CalculateDirection(tr)))
                 .PermitDynamic(Trigger.Next, () => Go(Trigger.Next))
@@ -459,6 +465,19 @@ namespace GitHub.Controllers
             logic.Configure(UIViewType.End)
                 .Permit(Trigger.Next, UIViewType.None);
             machines.Add(UIControllerFlow.Clone, logic);
+
+            // add from GitHub flow
+            logic = new StateMachine<UIViewType, Trigger>(UIViewType.None);
+            logic.Configure(UIViewType.None)
+                .Permit(Trigger.Next, UIViewType.Clone)
+                .Permit(Trigger.Finish, UIViewType.End);
+            logic.Configure(UIViewType.AddFileToSolution)
+                .Permit(Trigger.Next, UIViewType.End)
+                .Permit(Trigger.Cancel, UIViewType.End)
+                .Permit(Trigger.Finish, UIViewType.End);
+            logic.Configure(UIViewType.End)
+                .Permit(Trigger.Next, UIViewType.None);
+            machines.Add(UIControllerFlow.AddFileToSolution, logic);
 
             // create flow
             logic = new StateMachine<UIViewType, Trigger>(UIViewType.None);
